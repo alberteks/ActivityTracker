@@ -22,5 +22,19 @@ namespace ActivityTracker.Controllers
 
             return View(activites);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create([Bind("Id, Name, Date")] Activity activity)
+        {
+            _db.Add(activity);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
