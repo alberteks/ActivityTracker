@@ -1,5 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<ActivityTracker.Models.Activity>
+
+@if(Model.Count()>0){
+    <h2>Activities</h2>
+    <a class="btn btn-info" asp-action="Create">Create a new activity</a>
+    <table class="table">
+        <tr class="table-secondary">
+            <th>Name</th>
+            <th>Date</th>
+        </tr>
+        @foreach (var activity in Model)
+        {
+            <tr>
+                <td>@activity.Name</td>
+                <td>@activity.Date</td>
+                <td>
+                    <a class="btn btn-warning" asp-route-id="@activity.Id" asp-action="Edit"> Edit </a>
+                    <a class="btn btn-danger" asp-route-id="@activity.Id" asp-action="Delete">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else{
+    <h2>Oops!</h2>
+    <p>Unfortunately, it seems that you have not yet added any activites. Please create one in order to start tracking via a table.</p>
+    <a class="btn btn-info" asp-action="Create">Create a New Activity</a>
 }
