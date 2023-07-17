@@ -36,5 +36,31 @@ namespace ActivityTracker.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var activity = _db.Activities.FirstOrDefault(a => a.Id == id);
+                return View(activity);
+            }
+        }
+        [HttpPost]
+        public IActionResult Edit(int id, [Bind("Id, Name, Date")] Activity activity)
+        {
+            if (id != activity.Id)
+            {
+                return NotFound();
+            }
+
+            _db.Update(activity);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
