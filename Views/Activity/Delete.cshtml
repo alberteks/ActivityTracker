@@ -1,0 +1,12 @@
+﻿@model ActivityTracker.Models.Activity
+
+<h3 class="custom-text">Confirm delete action</h3>
+
+<div class="alert alert-danger">
+    <h4>Are you fully sure you would like to delete this activity?</h4>
+    <p>Once you delete, there is no restoring previous information.</p>
+    <form asp-action="Delete" method="post">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">No, go back home</a>
+    </form>
+</div>
